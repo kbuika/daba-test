@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import Header from "../layout/Header";
 
 function ChangeInfo() {
   return (
     <MainDiv>
-      <HeaderDiv></HeaderDiv>
+      <HeaderDiv>
+        <Header />
+      </HeaderDiv>
       <ContentDiv>
-        <a href="#">&#60; Back</a>
+        <a href="/">&#60; Back</a>
         <ContentCard>
           <CardTitleDiv>
             <h2>Change Info</h2>
@@ -39,11 +42,11 @@ function ChangeInfo() {
           <Button>Save</Button>
         </ContentCard>
         <BottomTextDiv>
-            <p>
-              created by <u>username</u>
-            </p>
-            <p>devChallenges.io</p>
-          </BottomTextDiv>
+          <p>
+            created by <u>username</u>
+          </p>
+          <p>devChallenges.io</p>
+        </BottomTextDiv>
       </ContentDiv>
     </MainDiv>
   );
@@ -58,7 +61,10 @@ const MainDiv = styled.div`
   justify-content: center;
 `;
 
-const HeaderDiv = styled.div``;
+const HeaderDiv = styled.div`
+  width: 100%;
+  margin-bottom: 125px;
+`;
 
 const ContentDiv = styled.div`
   display: flex;
@@ -75,6 +81,7 @@ const ContentDiv = styled.div`
     letter-spacing: -0.035em;
     color: #2d9cdb;
     align-self: flex-start;
+    margin-bottom: 24px;
   }
 `;
 
@@ -87,8 +94,7 @@ const ContentCard = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-    justify-content: center;
-
+  justify-content: center;
 `;
 
 const CardTitleDiv = styled.div`
@@ -219,6 +225,7 @@ const BottomTextDiv = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 12.25px;
+  margin-bottom: 71px;
 
   > p {
     font-style: normal;
@@ -229,4 +236,3 @@ const BottomTextDiv = styled.div`
     color: #828282;
   }
 `;
-

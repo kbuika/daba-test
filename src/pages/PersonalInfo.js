@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import Header from "../layout/Header";
 
 function PersonalInfo() {
   return (
     <MainDiv>
-      <HeaderDiv></HeaderDiv>
+      <HeaderDiv><Header /></HeaderDiv>
         <ContentDiv>
           <h2>Personal Info</h2>
           <p>Basic info, like your name and photo</p>
@@ -54,10 +55,17 @@ function PersonalInfo() {
 
 export default PersonalInfo;
 
-const MainDiv = styled.div``;
+const MainDiv = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+`;
 
-const HeaderDiv = styled.div``;
-
+const HeaderDiv = styled.div`
+  width: 100%;
+  margin-bottom: 125px;
+`;
 const ContentDiv = styled.div`
   display: flex;
   flex-flow: column nowrap;
@@ -181,6 +189,7 @@ const BottomTextDiv = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 12.25px;
+  margin-bottom: 71px;
 
   > p {
     font-style: normal;
