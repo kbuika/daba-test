@@ -4,7 +4,7 @@ import styled from "styled-components";
 function PersonalInfo() {
   return (
     <MainDiv>
-      <HeaderDiv>
+      <HeaderDiv></HeaderDiv>
         <ContentDiv>
           <h2>Personal Info</h2>
           <p>Basic info, like your name and photo</p>
@@ -48,7 +48,6 @@ function PersonalInfo() {
             <p>devChallenges.io</p>
           </BottomTextDiv>
         </ContentDiv>
-      </HeaderDiv>
     </MainDiv>
   );
 }
