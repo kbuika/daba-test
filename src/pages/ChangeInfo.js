@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "../layout/Header";
+import Steve from "../resources/images/steve.jpg";
 
 function ChangeInfo() {
   return (
@@ -16,7 +17,7 @@ function ChangeInfo() {
             <p>Changes will be reflected to every services</p>
           </CardTitleDiv>
           <ImageDiv>
-            <img src="#" alt="profile"></img>
+            <img src={Steve} alt="profile"></img>
             <p>CHANGE PHOTO</p>
           </ImageDiv>
           <InputDiv>
@@ -64,6 +65,10 @@ const MainDiv = styled.div`
 const HeaderDiv = styled.div`
   width: 100%;
   margin-bottom: 125px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 97px;
+  }
 `;
 
 const ContentDiv = styled.div`
@@ -82,6 +87,15 @@ const ContentDiv = styled.div`
     color: #2d9cdb;
     align-self: flex-start;
     margin-bottom: 24px;
+
+    @media (max-width: 768px) {
+      margin-bottom: 4px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 100vw;
+    padding: 0 28px;
   }
 `;
 
@@ -95,6 +109,13 @@ const ContentCard = styled.div`
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    width: 100vw;
+    height: auto;
+    border: none;
+    padding: 17px 28px;
+  }
 `;
 
 const CardTitleDiv = styled.div`
@@ -141,6 +162,7 @@ const ImageDiv = styled.div`
     border-radius: 8px;
     blend: pass through;
     background: rgba(0, 0, 0, 0.2);
+    object-fit: cover;
   }
 
   > p {
@@ -185,6 +207,10 @@ const InputDiv = styled.div`
     letter-spacing: -0.035em;
     color: #bdbdbd;
     padding: 17px 18px;
+
+    @media (max-width: 768px) {
+      width: 300px;
+    }
   }
 
   > textarea {
@@ -200,6 +226,10 @@ const InputDiv = styled.div`
     letter-spacing: -0.035em;
     color: #bdbdbd;
     padding: 17px 18px;
+
+    @media (max-width: 768px) {
+      width: 300px;
+    }
   }
 `;
 
@@ -234,5 +264,12 @@ const BottomTextDiv = styled.div`
     line-height: 19px;
     letter-spacing: -0.035em;
     color: #828282;
+  }
+
+  @media (max-width: 768px) {
+    width: 82vw;
+    margin-top: 19px;
+    align-self: center;
+    margin-bottom: 17px;
   }
 `;

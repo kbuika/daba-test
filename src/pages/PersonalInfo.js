@@ -1,54 +1,57 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "../layout/Header";
+import Steve from "../resources/images/steve.jpg";
 
 function PersonalInfo() {
   return (
     <MainDiv>
-      <HeaderDiv><Header /></HeaderDiv>
-        <ContentDiv>
-          <h2>Personal Info</h2>
-          <p>Basic info, like your name and photo</p>
-          <ContentCard>
-            <section>
-              <div>
-                <h3>Profile</h3>
-                <p>Some info may be visible to other people</p>
-              </div>
-              <button>Edit</button>
-            </section>
-            <ContactItem>
-              <h3>PHOTO</h3>
-              <img src="#" alt="profile"></img>
-            </ContactItem>
-            <ContactItem>
-              <h3>NAME</h3>
-              <p>Xanthe Neal</p>
-            </ContactItem>
-            <ContactItem>
-              <h3>BIO</h3>
-              <p>I am a software developer and a big fan of devchallenges...</p>
-            </ContactItem>
-            <ContactItem>
-              <h3>PHONE</h3>
-              <p>9379237492184</p>
-            </ContactItem>
-            <ContactItem>
-              <h3>EMAIL</h3>
-              <p>xanthe.neal@gmail.com</p>
-            </ContactItem>
-            <ContactItem>
-              <h3>PHOTO</h3>
-              <p>************</p>
-            </ContactItem>
-          </ContentCard>
-          <BottomTextDiv>
-            <p>
-              created by <u>username</u>
-            </p>
-            <p>devChallenges.io</p>
-          </BottomTextDiv>
-        </ContentDiv>
+      <HeaderDiv>
+        <Header />
+      </HeaderDiv>
+      <ContentDiv>
+        <h2>Personal info</h2>
+        <p>Basic info, like your name and photo</p>
+        <ContentCard>
+          <section>
+            <div>
+              <h3>Profile</h3>
+              <p>Some info may be visible to other people</p>
+            </div>
+            <button>Edit</button>
+          </section>
+          <ContactItem>
+            <h3>PHOTO</h3>
+            <img src={Steve} alt="profile"></img>
+          </ContactItem>
+          <ContactItem>
+            <h3>NAME</h3>
+            <p>Xanthe Neal</p>
+          </ContactItem>
+          <ContactItem>
+            <h3>BIO</h3>
+            <p>I am a software developer and a big fan of devchallenges...</p>
+          </ContactItem>
+          <ContactItem>
+            <h3>PHONE</h3>
+            <p>9379237492184</p>
+          </ContactItem>
+          <ContactItem>
+            <h3>EMAIL</h3>
+            <p>xanthe.neal@gmail.com</p>
+          </ContactItem>
+          <ContactItem>
+            <h3>PHOTO</h3>
+            <p>************</p>
+          </ContactItem>
+        </ContentCard>
+        <BottomTextDiv>
+          <p>
+            created by <u>username</u>
+          </p>
+          <p>devChallenges.io</p>
+        </BottomTextDiv>
+      </ContentDiv>
     </MainDiv>
   );
 }
@@ -65,6 +68,10 @@ const MainDiv = styled.div`
 const HeaderDiv = styled.div`
   width: 100%;
   margin-bottom: 125px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 97px;
+  }
 `;
 const ContentDiv = styled.div`
   display: flex;
@@ -110,11 +117,15 @@ const ContentCard = styled.div`
     width: 100%;
     padding: 29px 48px;
 
+    @media (max-width: 768px) {
+      padding: 10px 28px;
+    }
+
     > div {
       display: flex;
       flex-flow: column nowrap;
       align-items: flex-start;
-      justify-content: center;  
+      justify-content: center;
 
       > h3 {
         font-weight: 400;
@@ -132,6 +143,11 @@ const ContentCard = styled.div`
         letter-spacing: -0.035em;
         color: #828282;
         margin-top: 4px;
+
+        @media (max-width: 768px) {
+          width: 170px;
+          text-align: left;
+        }
       }
     }
 
@@ -142,6 +158,11 @@ const ContentCard = styled.div`
       border: 1px solid #828282;
       border-radius: 12px;
     }
+  }
+
+  @media (max-width: 768px) {
+    width: 100vw;
+    border: none;
   }
 `;
 
@@ -162,6 +183,10 @@ const ContactItem = styled.div`
     letter-spacing: -0.035em;
     color: #bdbdbd;
     margin-right: 208px;
+
+    @media (max-width: 768px) {
+      margin-right: 50px;
+    }
   }
 
   > p {
@@ -171,6 +196,11 @@ const ContactItem = styled.div`
     line-height: 25px;
     letter-spacing: -0.035em;
     color: #333333;
+
+    @media (max-width: 768px) {
+      align-self: flex-end;
+      text-align: right;
+    }
   }
 
   > img {
@@ -178,6 +208,14 @@ const ContactItem = styled.div`
     width: 72px;
     border-radius: 8px;
     border: none;
+    object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    padding: 19px 28px;
+    border-top: none;
+    border-bottom: 1px solid #d3d3d3;
+    justify-content: space-between;
   }
 `;
 
@@ -198,5 +236,12 @@ const BottomTextDiv = styled.div`
     line-height: 19px;
     letter-spacing: -0.035em;
     color: #828282;
+  }
+
+  @media (max-width: 768px) {
+    width: 90vw;
+    margin-top: 19px;
+    align-self: center;
+    margin-bottom: 17px;
   }
 `;
