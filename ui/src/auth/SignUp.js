@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../resources/Colors";
-import LogoImage from "../resources/logos/devchallenges.svg"
+import LogoImage from "../resources/logos/devchallenges.svg";
 import EmailIcon from "../resources/icons/email.svg";
 import PasswordIcon from "../resources/icons/lock.svg";
 import Google from "../resources/logos/Google.svg";
@@ -10,43 +10,54 @@ import Facebook from "../resources/logos/Facebook.svg";
 import Github from "../resources/logos/Gihub.svg";
 
 const IconsArr = [
-    {
-        icon: Google,
-        alt: "google"
-    },
-    {
-        icon: Facebook,
-        alt: "facebook"
-    },
-    {
-        icon: Twitter,
-        alt: "twitter"
-    },
-    {
-        icon: Github,
-        alt: "github"
-    }
-]
+  {
+    icon: Google,
+    alt: "google",
+  },
+  {
+    icon: Facebook,
+    alt: "facebook",
+  },
+  {
+    icon: Twitter,
+    alt: "twitter",
+  },
+  {
+    icon: Github,
+    alt: "github",
+  },
+];
 
-function SignIn() {
+function SignUp() {
   return (
     <MainDiv>
       <MainCard>
-      <Logo src={LogoImage} alt="logo"></Logo>
-        <CardTitle>Login</CardTitle>
+        <Logo src={LogoImage} alt="logo"></Logo>
+        <CardTitle>Join thousands of learners from around the world</CardTitle>
+        <CardTagline>
+          Master web development by making real-life projects. There are
+          multiple paths for you to choose
+        </CardTagline>
         <InputDiv>
-        <Input><img src={EmailIcon} alt="email"></img><input placeholder="Email"></input></Input>
-          <Input><img src={PasswordIcon} alt="password" password></img><input placeholder="Password"></input></Input>
-          
-          <Button>Login</Button>
+          <Input>
+            <img src={EmailIcon} alt="email"></img>
+            <input placeholder="Email"></input>
+          </Input>
+          <Input>
+            <img src={PasswordIcon} alt="password" password></img>
+            <input placeholder="Password"></input>
+          </Input>
+
+          <Button>Start coding now</Button>
         </InputDiv>
         <AltText>or continue with these social profile</AltText>
-        <IconsDiv>{
-            IconsArr.map(i => {
-                return <SocialIcon src={i.icon} alt={`${i.alt}`}></SocialIcon>
-            })}</IconsDiv>
+        <IconsDiv>
+          {IconsArr.map((i) => {
+            return <SocialIcon src={i.icon} alt={`${i.alt}`}></SocialIcon>;
+          })}
+        </IconsDiv>
         <RegisterText>
-          Don't have an account yet? <a href="/signup">Register</a>
+          Already a member? <a href="/signin">Login</a>
         </RegisterText>
       </MainCard>
       <BottomTextDiv>
@@ -59,7 +70,7 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignUp;
 
 const MainDiv = styled.div`
   display: flex;
@@ -67,13 +78,19 @@ const MainDiv = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
+
+  @media (max-width: 768px) {
+    align-items: flex-start;
+  }
 `;
 
+const Logo = styled.img``;
+
 const MainCard = styled.div`
-  height: 544.3720703125px;
-  width: 473.83062744140625px;
-  left: 483.084716796875px;
-  top: 253.6484375px;
+  height: 634.3px;
+  width: 473.83px;
+  left: 483.08px;
+  top: 253.64px;
   border-radius: 24px;
   border: 1px solid ${colors.grey};
   display: flex;
@@ -81,12 +98,18 @@ const MainCard = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   padding: 58px;
+
+  @media (max-width: 768px) {
+    border: none;
+    height: 90vh;
+    width: 90vw;
+    padding: 18px;
+    margin: 17px 18px;
+  }
 `;
 
-const Logo = styled.img`
-`
-
-const CardTitle = styled.div`
+const CardTitle = styled.h2`
+  font-family: "Noto Sans";
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
@@ -94,6 +117,25 @@ const CardTitle = styled.div`
   letter-spacing: -0.035em;
   color: #333333;
   margin-top: 27.5px;
+  width: 75%;
+  text-align: left;
+
+  @media (max-width: 768px) {
+    margin-top: 47px;
+  }
+`;
+
+const CardTagline = styled.h3`
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: -0.035em;
+  color: #333333;
+  margin-top: 14.5px;
+  width: 90%;
+  text-align: left;
 `;
 
 const InputDiv = styled.div`
@@ -120,8 +162,8 @@ const Input = styled.div`
   > img {
       align-self: left;
       margin-left: 14px;
-      height: ${props => props.password ? "21px" : "16px"}
-      width: ${props => props.password ? "16px" : "20px"}
+      height: ${(props) => (props.password ? "21px" : "16px")}
+      width: ${(props) => (props.password ? "16px" : "20px")}
       color: #828282;
   }
 
@@ -179,9 +221,9 @@ const IconsDiv = styled.div`
 `;
 
 const SocialIcon = styled.img`
-height: 42px;
-width: 42px;
-`
+  height: 42px;
+  width: 42px;
+`;
 
 const RegisterText = styled.h3`
   font-family: Noto Sans;
@@ -217,5 +259,11 @@ const BottomTextDiv = styled.div`
     letter-spacing: -0.035em;
     color: #828282;
   }
-`;
 
+  @media (max-width: 768px) {
+    width: 90vw;
+    margin-top: 0;
+    align-self: center;
+    margin-bottom: 17px;
+  }
+`;
