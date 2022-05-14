@@ -2,7 +2,6 @@
 import { Fragment, useState, useEffect } from "react";
 import { Popover, Transition, Menu } from "@headlessui/react";
 import DevLogo from "../resources/logos/devchallenges.svg";
-import Steve from "../resources/images/steve.jpg";
 import GroupIcon from "../resources/icons/group.svg";
 import AvatarIcon from "../resources/icons/account.svg";
 import LogoutIcon from "../resources/icons/logout.svg";
@@ -74,7 +73,7 @@ export default function Header() {
                       <Menu.Button className="max-w-xs bg-gray-800 rounded-full flex items-center text-sm">
                         <span className="sr-only">Open user menu</span>
                         <Image
-                          src={data?.avatar || Steve}
+                          src={data?.avatar}
                           alt="user avatar"
                           style={{ objectFit: "cover" }}
                         />

@@ -35,7 +35,7 @@ function ChangeInfo() {
 
     var config = {
       method: "post",
-      url: "http://localhost:5000/graphql/",
+      url: process.env.REACT_APP_API_URL + "/graphql/",
       headers: {
         "Content-Type": "application/json",
       },
@@ -47,7 +47,7 @@ function ChangeInfo() {
         console.log(response.data.data.user.name);
         setData(response.data.data.user);
         let res = response.data.data.user;
-        setDetails({name: res.name, email: res.email, phone: res.phone, bio: res.bio, avatar: res.avatar});
+        setDetails({name: res.name, email: res.email, phone: res.phone, bio: res.bio});
       })
       .catch(function (error) {
         setError(error);
