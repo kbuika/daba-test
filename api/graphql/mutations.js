@@ -51,9 +51,6 @@ const updateUser = {
     phone: { type: GraphQLString },
   },
   async resolve(parent, args) {
-    if (!verifiedUser) {
-      throw new Error("You must be logged in to update a user");
-    }
     const userUpdated = await User.findOneAndUpdate(
       {
         _id: args.id,

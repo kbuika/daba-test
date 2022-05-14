@@ -76,7 +76,7 @@ function PersonalInfo() {
           </ContactItem>
           <ContactItem>
             <h3>BIO</h3>
-            <p>{data?.bio}...</p>
+            <p>{data?.bio.slice(0, 35)}...</p>
           </ContactItem>
           <ContactItem>
             <h3>PHONE</h3>

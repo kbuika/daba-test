@@ -1,46 +1,152 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Header from "../layout/Header";
 import Steve from "../resources/images/steve.jpg";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 
 function ChangeInfo() {
+  const [data, setData] = useState(null);
+  const [details, setDetails] = useState({
+    name: "",
+    bio: "",
+    phone: "",
+    email: "",
+    avatar: "",
+  });
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  let userId = useParams().id;
+  let email = localStorage.getItem("email");
+
+  useEffect(() => {
+    var data = JSON.stringify({
+      query: `query($email: String!){
+      user(email: $email) {
+        id
+        name
+        avatar
+        bio
+        phone
+        email
+      }
+    }`,
+      variables: { email: email },
+    });
+
+    var config = {
+      method: "post",
+      url: "http://localhost:5000/graphql/",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data.data.user.name);
+        setData(response.data.data.user);
+        let res = response.data.data.user;
+        setDetails({name: res.name, email: res.email, phone: res.phone, bio: res.bio, avatar: res.avatar});
+      })
+      .catch(function (error) {
+        setError(error);
+      });
+  }, [email]);
+
+  const updateDetails = (e) => {
+    e.preventDefault();
+    var data = JSON.stringify({
+      query: `mutation($email: String!, $name: String!,$id: ID!,$phone: String!,$bio: String!,$avatar: String!,){
+      updateUser(email: $email, name: $name, id: $id, phone: $phone, bio: $bio, avatar: $avatar) {
+        name
+        id
+        email
+        phone
+        bio
+        avatar
+      }
+    }`,
+      variables: {
+        email: details?.email,
+        name: details.name,
+        id: userId,
+        phone: details.phone,
+        bio: details.bio,
+        avatar: details.avatar,
+      },
+    });
+
+    var config = {
+      method: "post",
+      url: "http://localhost:5000/graphql/",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      navigate("/personal-info");
+  };
+
+  const onChange = (e) => {
+    console.log(e.target.value, e.target.name);
+
+    setDetails((prevState) => {
+      return { ...prevState, [e.target.name]: e.target.value };
+    });
+  };
   return (
     <MainDiv>
       <HeaderDiv>
         <Header />
       </HeaderDiv>
       <ContentDiv>
-        <a href="/">&#60; Back</a>
+        <a href="/personal-info">&#60; Back</a>
         <ContentCard>
           <CardTitleDiv>
             <h2>Change Info</h2>
             <p>Changes will be reflected to every services</p>
           </CardTitleDiv>
           <ImageDiv>
-            <img src={Steve} alt="profile"></img>
+            <img src={data?.avatar} alt="profile"></img>
             <p>CHANGE PHOTO</p>
           </ImageDiv>
           <InputDiv>
             <p>Name</p>
-            <input placeholder="Enter your name..."></input>
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter your name..."
+              onChange={onChange}
+              value={details.name}
+            ></input>
           </InputDiv>
           <InputDiv>
             <p>Bio</p>
-            <textarea placeholder="Enter your bio..."></textarea>
+            <textarea type="text" name="bio" placeholder="Enter your bio..." value={details?.bio} onChange={onChange}></textarea>
           </InputDiv>
           <InputDiv>
             <p>Phone</p>
-            <input placeholder="Enter your phone..."></input>
+            <input type="text" name="phone" placeholder="Enter your phone..." value={details?.phone} onChange={onChange}></input>
           </InputDiv>
           <InputDiv>
             <p>Email</p>
-            <input placeholder="Enter your email..."></input>
+            <input type="email" name="email" placeholder="Enter your email..." value={details?.email} disabled={true}></input>
           </InputDiv>
           <InputDiv>
             <p>Password</p>
-            <input placeholder="Enter your password..."></input>
+            <input placeholder="Enter your password...(disabled)"></input>
           </InputDiv>
-          <Button>Save</Button>
+          <Button onClick={updateDetails}>Save</Button>
         </ContentCard>
         <BottomTextDiv>
           <p>
