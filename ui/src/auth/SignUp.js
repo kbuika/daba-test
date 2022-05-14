@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../resources/Colors";
 import LogoImage from "../resources/logos/devchallenges.svg";
@@ -8,6 +8,7 @@ import Google from "../resources/logos/Google.svg";
 import Twitter from "../resources/logos/Twitter.svg";
 import Facebook from "../resources/logos/Facebook.svg";
 import Github from "../resources/logos/Gihub.svg";
+import axios from "axios";
 
 const IconsArr = [
   {
@@ -29,6 +30,44 @@ const IconsArr = [
 ];
 
 function SignUp() {
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [error, setError] = useState(null);
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setError(null);
+    var data = JSON.stringify({
+      query: `mutation($email: String!, $password: String!) {
+        register(email: $email, password: $password)
+    }`,
+      variables: { email: email.target.value, password: password.target.value },
+    });
+
+    var config = {
+      method: "post",
+      url: "http://localhost:5000/graphql/",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    axios(config)
+      .then(function (response) {
+        if (response.data.errors) {
+          setError(response.data.errors[0]["message"]);
+          return;
+        }
+        localStorage.setItem("token", response.data.data.register);
+        localStorage.setItem("auth", true);
+        localStorage.setItem("email", email.target.value);
+        window.location.href = `/personal-info`;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
   return (
     <MainDiv>
       <MainCard>
@@ -39,16 +78,21 @@ function SignUp() {
           multiple paths for you to choose
         </CardTagline>
         <InputDiv>
+          {error && <Err>{error}</Err>}
           <Input>
             <img src={EmailIcon} alt="email"></img>
-            <input placeholder="Email"></input>
+            <input placeholder="Email" onChange={setEmail}></input>
           </Input>
           <Input>
             <img src={PasswordIcon} alt="password" password></img>
-            <input placeholder="Password"></input>
+            <input
+              type="password"
+              placeholder="Password"
+              onChange={setPassword}
+            ></input>
           </Input>
 
-          <Button>Start coding now</Button>
+          <Button onClick={handleRegister}>Start coding now</Button>
         </InputDiv>
         <AltText>or continue with these social profile</AltText>
         <IconsDiv>
@@ -85,6 +129,12 @@ const MainDiv = styled.div`
 `;
 
 const Logo = styled.img``;
+
+const Err = styled.p`
+  color: red;
+  font-size: 0.8em;
+  margin-bottom: 0.5em;
+`;
 
 const MainCard = styled.div`
   height: 634.3px;
