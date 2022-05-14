@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom"
 
 function PersonalInfo() {
   const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
+  const [, setError] = useState(null);
   const navigate = useNavigate();
   let email = localStorage.getItem("email");
 
@@ -37,7 +37,6 @@ function PersonalInfo() {
     
     axios(config)
     .then(function (response) {
-      console.log((response.data.data.user.name));
       setData(response.data.data.user);
     })
     .catch(function (error) {

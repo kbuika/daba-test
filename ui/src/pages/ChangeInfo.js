@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Header from "../layout/Header";
-import Steve from "../resources/images/steve.jpg";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -14,7 +13,7 @@ function ChangeInfo() {
     email: "",
     avatar: "",
   });
-  const [error, setError] = useState(null);
+  const [, setError] = useState(null);
   const navigate = useNavigate();
   let userId = useParams().id;
   let email = localStorage.getItem("email");
@@ -98,8 +97,6 @@ function ChangeInfo() {
   };
 
   const onChange = (e) => {
-    console.log(e.target.value, e.target.name);
-
     setDetails((prevState) => {
       return { ...prevState, [e.target.name]: e.target.value };
     });

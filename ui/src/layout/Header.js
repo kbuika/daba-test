@@ -11,7 +11,7 @@ import axios from "axios";
 
 export default function Header() {
   const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
+  const [, setError] = useState(null);
   let email = localStorage.getItem("email");
 
   useEffect(() => {
@@ -48,6 +48,13 @@ export default function Header() {
     });
     
   }, [email]);
+
+  const LogOut = () => {
+    localStorage.removeItem("email");
+    localStorage.removeItem("token");
+    localStorage.setItem("auth", false);
+    window.location.href = "/";
+  }
   return (
     <Popover className="fixed bg-white z-10 w-screen mb-20 px-4 md:px-16 md:mb-40">
       <>
@@ -100,7 +107,7 @@ export default function Header() {
                                 <p>Group Chat</p>
                               </PopUpItem>
                               <div style={{height: '2px', width: '100%', backgroundColor: '#E0E0E0'}}></div>
-                              <PopUpItem>
+                              <PopUpItem onClick={LogOut}>
                                 <img
                                   src={LogoutIcon}
                                   alt="profile"
