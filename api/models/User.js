@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  username: {
+  name: {
     type: String,
-    required: true,
   },
   password: {
     type: String,
@@ -23,14 +22,14 @@ const userSchema = new mongoose.Schema({
   avatar: {
     type: String,
     default:
-      "https://res.cloudinary.com/dzqbzqgjw/image/upload/v1599098981/avatar_default_qjqjqj.png",
+      "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=retro&f=y",
   },
   bio: {
     type: String,
     default: "",
   },
   phone: {
-    type: Number,
+    type: String,
     default: 0,
   },
 }, {timestamps: true});

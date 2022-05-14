@@ -1,9 +1,54 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import axios from "axios";
 import styled from "styled-components";
 import Header from "../layout/Header";
 import Steve from "../resources/images/steve.jpg";
+import {useNavigate} from "react-router-dom"
 
 function PersonalInfo() {
+  const [data, setData] = useState(null);
+  const [, setError] = useState(null);
+  const navigate = useNavigate();
+  let email = localStorage.getItem("email");
+
+  useEffect(() => {
+    var data = JSON.stringify({
+      query: `query($email: String!){
+      user(email: $email) {
+        id
+        name
+        avatar
+        bio
+        phone
+        email
+      }
+    }`,
+      variables: {email:email}
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'http://localhost:5000/graphql/',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      setData(response.data.data.user);
+    })
+    .catch(function (error) {
+      setError(error);
+    });
+    
+  }, [email]);
+
+  const changeDetails = (e) => {
+    e.preventDefault();
+    navigate(`/change-info/${data.id}`);
+  }
   return (
     <MainDiv>
       <HeaderDiv>
@@ -18,30 +63,30 @@ function PersonalInfo() {
               <h3>Profile</h3>
               <p>Some info may be visible to other people</p>
             </div>
-            <button>Edit</button>
+            <button onClick={changeDetails}>Edit</button>
           </section>
           <ContactItem>
             <h3>PHOTO</h3>
-            <img src={Steve} alt="profile"></img>
+            <img src={data?.avatar || Steve} alt="profile"></img>
           </ContactItem>
           <ContactItem>
             <h3>NAME</h3>
-            <p>Xanthe Neal</p>
+            <p>{data?.name || '-'}</p>
           </ContactItem>
           <ContactItem>
             <h3>BIO</h3>
-            <p>I am a software developer and a big fan of devchallenges...</p>
+            <p>{data?.bio.slice(0, 35)}...</p>
           </ContactItem>
           <ContactItem>
             <h3>PHONE</h3>
-            <p>9379237492184</p>
+            <p>{data?.phone || '-'}</p>
           </ContactItem>
           <ContactItem>
             <h3>EMAIL</h3>
-            <p>xanthe.neal@gmail.com</p>
+            <p>{data?.email || '-'}</p>
           </ContactItem>
           <ContactItem>
-            <h3>PHOTO</h3>
+            <h3>Password</h3>
             <p>************</p>
           </ContactItem>
         </ContentCard>

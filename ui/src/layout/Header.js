@@ -1,5 +1,5 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from "react";
+import { Fragment, useState, useEffect } from "react";
 import { Popover, Transition, Menu } from "@headlessui/react";
 import DevLogo from "../resources/logos/devchallenges.svg";
 import Steve from "../resources/images/steve.jpg";
@@ -7,8 +7,54 @@ import GroupIcon from "../resources/icons/group.svg";
 import AvatarIcon from "../resources/icons/account.svg";
 import LogoutIcon from "../resources/icons/logout.svg";
 import styled from "styled-components";
+import axios from "axios";
 
 export default function Header() {
+  const [data, setData] = useState(null);
+  const [, setError] = useState(null);
+  let email = localStorage.getItem("email");
+
+  useEffect(() => {
+    var data = JSON.stringify({
+      query: `query($email: String!){
+      user(email: $email) {
+        id
+        name
+        avatar
+        bio
+        phone
+        email
+      }
+    }`,
+      variables: {email:email}
+    });
+    
+    var config = {
+      method: 'post',
+      url: 'http://localhost:5000/graphql/',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios(config)
+    .then(function (response) {
+      console.log((response.data.data.user.name));
+      setData(response.data.data.user);
+    })
+    .catch(function (error) {
+      setError(error);
+    });
+    
+  }, [email]);
+
+  const LogOut = () => {
+    localStorage.removeItem("email");
+    localStorage.removeItem("token");
+    localStorage.setItem("auth", false);
+    window.location.href = "/";
+  }
   return (
     <Popover className="fixed bg-white z-10 w-screen mb-20 px-4 md:px-16 md:mb-40">
       <>
@@ -16,8 +62,8 @@ export default function Header() {
           <div className="flex justify-between items-center py-6 md:justify-start md:space-x-10">
             <div className="flex justify-start lg:w-0 lg:flex-1">
               <a href="/">
-                <p className="sr-only">CodeMatata</p>
-                <object data={DevLogo} aria-label="codematata logo" />
+                <p className="sr-only">Dev challenges</p>
+                <object data={DevLogo} aria-label="dev logo" />
               </a>
             </div>
             <div className="md:flex items-center justify-end md:flex-1 lg:w-0">
@@ -28,12 +74,12 @@ export default function Header() {
                       <Menu.Button className="max-w-xs bg-gray-800 rounded-full flex items-center text-sm">
                         <span className="sr-only">Open user menu</span>
                         <Image
-                          src={Steve}
+                          src={data?.avatar || Steve}
                           alt="user avatar"
                           style={{ objectFit: "cover" }}
                         />
                       </Menu.Button>
-                      <ImageTag className="ml-4">Name</ImageTag>
+                      <ImageTag className="ml-4">{data?.name || '-'}</ImageTag>
                     </div>
                     <Transition
                       show={open}
@@ -61,7 +107,7 @@ export default function Header() {
                                 <p>Group Chat</p>
                               </PopUpItem>
                               <div style={{height: '2px', width: '100%', backgroundColor: '#E0E0E0'}}></div>
-                              <PopUpItem>
+                              <PopUpItem onClick={LogOut}>
                                 <img
                                   src={LogoutIcon}
                                   alt="profile"
