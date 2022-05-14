@@ -9,6 +9,7 @@ import Twitter from "../resources/logos/Twitter.svg";
 import Facebook from "../resources/logos/Facebook.svg";
 import Github from "../resources/logos/Gihub.svg";
 import axios from "axios";
+import {useNavigate} from "react-router-dom"
 
 const IconsArr = [
   {
@@ -33,6 +34,7 @@ function SignUp() {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -62,7 +64,7 @@ function SignUp() {
         localStorage.setItem("token", response.data.data.register);
         localStorage.setItem("auth", true);
         localStorage.setItem("email", email.target.value);
-        window.location.href = `/personal-info`;
+        navigate(`/personal-info`);
       })
       .catch(function (error) {
         console.log(error);
