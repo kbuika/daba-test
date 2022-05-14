@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Header from "../layout/Header";
-import Steve from "../resources/images/steve.jpg";
 import {useNavigate} from "react-router-dom"
 
 function PersonalInfo() {
@@ -67,7 +66,7 @@ function PersonalInfo() {
           </section>
           <ContactItem>
             <h3>PHOTO</h3>
-            <img src={data?.avatar || Steve} alt="profile"></img>
+            <img src={data?.avatar} alt="profile"></img>
           </ContactItem>
           <ContactItem>
             <h3>NAME</h3>
