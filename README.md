@@ -8,11 +8,11 @@
 
 <div align="center">
   <h3>
-    <a href="https://{your-demo-link.your-domain}">
+    <a href="https://daba-test.netlify.app/" target="_blank">
       Demo
     </a>
     <span> | </span>
-    <a href="https://{your-url-to-the-solution}">
+    <a href="https://daba-test.netlify.app/" target="_blank">
       Solution
     </a>
     <span> | </span>
@@ -39,10 +39,9 @@
 
 ![screenshot](https://user-images.githubusercontent.com/16707738/92399059-5716eb00-f132-11ea-8b14-bcacdc8ec97b.png)
 
-Introduce your projects by taking a screenshot, video recordings or a gif. Try to tell us about the solution you built by answering the following:
+This was a very interesting challenge. I have not used GraphQL for a while and it was great to get back to it. 
 
-- Where can I see your demo?
-- What was your experience building it.
+[Demo](https://daba-test.netlify.app/)
 
 ### Built With
 
@@ -50,13 +49,18 @@ Introduce your projects by taking a screenshot, video recordings or a gif. Try t
 
 - [React](https://reactjs.org/)
 - [Tailwind](https://tailwindcss.com/)
-- [Styled Components]()
+- Styled Components
+- NodeJS
+- GraphQL
+- MongoDB
 
 ## Features
 
 <!-- List the features of your application or follow the template. Don't share the figma file here :) -->
-
-coming soon
+- Sign Up
+- Sign In
+- View Profile details
+- Change Profile details
 
 ## How To Use
 
@@ -66,11 +70,31 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/your-user-name/your-project-name
+$ git clone https://github.com/kibuikaCodes/daba-test
 
-# Install dependencies
-$ npm install
+# cd into each directory independently
+# for the api
+$ cd api && npm install && npm start
 
-# Run the app
-$ npm start
+# open another terminal for the UI
+$ cd ui && npm install && npm start
 ```
+
+You will also need to provide environment variables for bot the UI an the API
+
+for the UI, you will need to provide: 
+```bash
+REACT_APP_API_URL="http://localhost:5000" # for the local api
+# the url of the hosted api is => https://daba-api.onrender.com/
+```
+
+for the API
+```bash
+PORT=5000
+MONGOURI="" # your own MongoDB access uri
+JWT_SECRET=YOUR_JWT_SECRET
+JWT_EXPIRES_IN="30 days"
+```
+
+
+### Happy Hacking!!
