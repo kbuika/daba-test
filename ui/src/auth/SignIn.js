@@ -34,10 +34,13 @@ function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError(null);
+    setLoading(true);
     var data = JSON.stringify({
       query: `mutation($email: String!, $password: String!) {
         login(email: $email, password: $password)
@@ -58,6 +61,7 @@ function SignIn() {
       .then(function (response) {
         if (response.data.errors) {
           setError(response.data.errors[0]["message"]);
+          setLoading(false);
           return;
         }
         localStorage.setItem("token", response.data.data.login);
@@ -68,6 +72,7 @@ function SignIn() {
       .catch(function (error) {
         console.log(error);
       });
+      setLoading(false);
   };
 
   return (
@@ -89,7 +94,7 @@ function SignIn() {
               onChange={setPassword}
             ></input>
           </Input>
-          <Button onClick={handleLogin}>Login</Button>
+          <Button onClick={handleLogin}>{loading ? '...' : 'Login'}</Button>
         </InputDiv>
         <AltText>or continue with these social profile</AltText>
         <IconsDiv>
