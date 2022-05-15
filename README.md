@@ -37,19 +37,19 @@
 
 ## Overview
 
-![screenshot](https://raw.githubusercontent.com/kibuikaCodes/daba-test/main/ui/src/resources/images/preview.png)
+![screenshot](./ui/src/resources/images/preview.png)
 
 This was a very interesting challenge. I have not used GraphQL for a while and it was great to get back to it. 
 The Frontend is hosted on Netlify while the Backend is hosted on Render
 
-[Demo](https://daba-test.netlify.app/)
-[API URL](https://daba-api.onrender.com/)
+- [Demo](https://daba-test.netlify.app/)
+- [API URL](https://daba-api.onrender.com/)
 
 Links to video explanations:
 
-[Video Explanation 1](https://www.loom.com/share/c3072faae9654e3b92b915f1598963b8)
-[Video Explanation 2](https://www.loom.com/share/467e4995e99a4c3a9cfd8d6f630fb05d)
-[Video Explanation 3](https://www.loom.com/share/1e236c8a3ed94afaa57e8bba32d9f14e)
+- [Video Explanation 1](https://www.loom.com/share/c3072faae9654e3b92b915f1598963b8)
+- [Video Explanation 2](https://www.loom.com/share/467e4995e99a4c3a9cfd8d6f630fb05d)
+- [Video Explanation 3](https://www.loom.com/share/1e236c8a3ed94afaa57e8bba32d9f14e)
 
 ### Built With
 
