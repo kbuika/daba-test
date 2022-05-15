@@ -29,7 +29,6 @@ function ChangeInfo() {
         bio
         phone
         email
-        password
       }
     }`,
       variables: { email: email },
@@ -59,7 +58,7 @@ function ChangeInfo() {
   const updateDetails = (e) => {
     e.preventDefault();
     var data = JSON.stringify({
-      query: `mutation($email: String!, $name: String!,$id: ID!,$phone: String!,$bio: String!,$avatar: String!,){
+      query: `mutation($email: String!, $name: String!,$id: ID!,$phone: String!,$bio: String!){
       updateUser(email: $email, name: $name, id: $id, phone: $phone, bio: $bio) {
         name
         id
