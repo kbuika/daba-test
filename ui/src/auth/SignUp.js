@@ -34,11 +34,13 @@ function SignUp() {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
     setError(null);
+    setLoading(true);
     var data = JSON.stringify({
       query: `mutation($email: String!, $password: String!) {
         register(email: $email, password: $password)
@@ -59,6 +61,7 @@ function SignUp() {
       .then(function (response) {
         if (response.data.errors) {
           setError(response.data.errors[0]["message"]);
+          setLoading(false);
           return;
         }
         localStorage.setItem("token", response.data.data.register);
@@ -69,6 +72,7 @@ function SignUp() {
       .catch(function (error) {
         console.log(error);
       });
+      setLoading(false);
   };
   return (
     <MainDiv>
@@ -94,7 +98,7 @@ function SignUp() {
             ></input>
           </Input>
 
-          <Button onClick={handleRegister}>Start coding now</Button>
+          <Button onClick={handleRegister}>{loading ? '...' : 'Start coding now'}</Button>
         </InputDiv>
         <AltText>or continue with these social profile</AltText>
         <IconsDiv>

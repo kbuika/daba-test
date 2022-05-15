@@ -30,7 +30,7 @@ export default function Header() {
     
     var config = {
       method: 'post',
-      url: 'http://localhost:5000/graphql/',
+      url: process.env.REACT_APP_API_URL + "/graphql/",
       headers: { 
         'Content-Type': 'application/json'
       },
