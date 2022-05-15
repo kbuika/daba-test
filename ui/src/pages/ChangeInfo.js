@@ -12,6 +12,7 @@ function ChangeInfo() {
     phone: "",
     email: "",
     avatar: "",
+    password: "",
   });
   const [, setError] = useState(null);
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ function ChangeInfo() {
         bio
         phone
         email
+        password
       }
     }`,
       variables: { email: email },
@@ -47,7 +49,7 @@ function ChangeInfo() {
         console.log(response.data.data.user.name);
         setData(response.data.data.user);
         let res = response.data.data.user;
-        setDetails({name: res.name, email: res.email, phone: res.phone, bio: res.bio});
+        setDetails({name: res.name, email: res.email, phone: res.phone, bio: res.bio, password: res.password, avatar: res.avatar});
       })
       .catch(function (error) {
         setError(error);
@@ -58,13 +60,12 @@ function ChangeInfo() {
     e.preventDefault();
     var data = JSON.stringify({
       query: `mutation($email: String!, $name: String!,$id: ID!,$phone: String!,$bio: String!,$avatar: String!,){
-      updateUser(email: $email, name: $name, id: $id, phone: $phone, bio: $bio, avatar: $avatar) {
+      updateUser(email: $email, name: $name, id: $id, phone: $phone, bio: $bio) {
         name
         id
         email
         phone
         bio
-        avatar
       }
     }`,
       variables: {
@@ -73,13 +74,12 @@ function ChangeInfo() {
         id: userId,
         phone: details.phone,
         bio: details.bio,
-        avatar: details.avatar,
       },
     });
 
     var config = {
       method: "post",
-      url: "http://localhost:5000/graphql/",
+      url: process.env.REACT_APP_API_URL + "/graphql/",
       headers: {
         "Content-Type": "application/json",
       },
@@ -141,7 +141,7 @@ function ChangeInfo() {
           </InputDiv>
           <InputDiv>
             <p>Password</p>
-            <input placeholder="Enter your password...(disabled)"></input>
+            <input type="password" name="password" placeholder="Enter your password...(disabled)" disabled={true} value={details?.password}></input>
           </InputDiv>
           <Button onClick={updateDetails}>Save</Button>
         </ContentCard>
