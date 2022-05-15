@@ -46,7 +46,6 @@ const updateUser = {
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     email: { type: GraphQLString },
-    avatar: { type: GraphQLString },
     bio: { type: GraphQLString },
     phone: { type: GraphQLString },
   },
@@ -58,7 +57,6 @@ const updateUser = {
       {
         name: args.name,
         email: args.email,
-        avatar: args.avatar,
         bio: args.bio,
         phone: args.phone,
       },
